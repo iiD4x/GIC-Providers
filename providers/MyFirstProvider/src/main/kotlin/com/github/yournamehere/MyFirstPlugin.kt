@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import com.flixclusive.provider.base.Provider
 import com.flixclusive.provider.base.plugin.FlixclusivePlugin
 import com.flixclusive.provider.base.plugin.Plugin
+import okhttp3.OkHttpClient
 
 /**
  * ## The main class for a Flixclusive plugin.
@@ -18,12 +19,6 @@ import com.flixclusive.provider.base.plugin.Plugin
  */
 @FlixclusivePlugin
 class MyFirstPlugin : Plugin() {
-
-    /**
-     * Provides a list of providers. By default, it's an empty list.
-     */
-    override val providers: List<Provider>
-            = emptyList()
 
     /**
      * TIP: This is an optional method to override
@@ -69,8 +64,11 @@ class MyFirstPlugin : Plugin() {
      *
      * @param context The [Context] of the app.
      */
-    override fun load(context: Context?) {
-        super.load(context)
+    override fun load(
+        context: Context?,
+        client: OkHttpClient
+    ) {
+        super.load(context, client)
         // TODO("OPTIONAL: Not yet implemented")
     }
 
