@@ -1,22 +1,20 @@
-import com.aliucord.gradle.AliucordExtension
+import com.flixclusive.gradle.FlixclusiveExtension
 import com.android.build.gradle.BaseExtension
 
 buildscript {
     repositories {
         google()
         mavenCentral()
-        // Aliucords Maven repo which contains our tools and dependencies
-        maven("https://maven.aliucord.com/snapshots")
-        // Shitpack which still contains some Aliucord dependencies for now. TODO: Remove
+        // Shitpack which still contains some Flixclusive dependencies for now.
         maven("https://jitpack.io")
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:7.0.4")
-        // Aliucord gradle plugin which makes everything work and builds plugins
-        classpath("com.aliucord:gradle:main-SNAPSHOT")
+        classpath("com.android.tools.build:gradle:7.2.2")
+        // Flixclusive gradle plugin which makes everything work and builds plugins
+        classpath("com.github.Flixclusive.plugins-gradle:plugins-gradle:main-SNAPSHOT")
         // Kotlin support. Remove if you want to use Java
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20")
     }
 }
 
@@ -24,29 +22,45 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven("https://maven.aliucord.com/snapshots")
+        maven("https://jitpack.io")
     }
 }
 
-fun Project.aliucord(configuration: AliucordExtension.() -> Unit) = extensions.getByName<AliucordExtension>("aliucord").configuration()
+fun Project.flixclusive(configuration: FlixclusiveExtension.() -> Unit) = extensions.getByName<FlixclusiveExtension>("flixclusive").configuration()
 
 fun Project.android(configuration: BaseExtension.() -> Unit) = extensions.getByName<BaseExtension>("android").configuration()
 
 subprojects {
     apply(plugin = "com.android.library")
-    apply(plugin = "com.aliucord.gradle")
+    apply(plugin = "com.flixclusive.gradle")
     // Remove if using Java
     apply(plugin = "kotlin-android")
 
     // Fill out with your info
-    aliucord {
-        author("DISCORD USERNAME", 123456789L)
+    flixclusive {
+        // Add authors
+        author(
+            name = "MyUsername",
+            // userLink = "http://github.com/myGithubUsername",
+            // discordId = 123456789L
+        )
+        // author( ... )
+        // author( ... )
+
         updateUrl.set("https://raw.githubusercontent.com/USERNAME/REPONAME/builds/updater.json")
-        buildUrl.set("https://raw.githubusercontent.com/USERNAME/REPONAME/builds/%s.zip")
+        buildUrl.set("https://raw.githubusercontent.com/USERNAME/REPONAME/builds/%s.flx")
     }
 
     android {
         compileSdkVersion(31)
+
+        buildFeatures.apply {
+            compose = true
+        }
+
+        composeOptions.apply {
+            kotlinCompilerExtensionVersion = "1.5.9"
+        }
 
         defaultConfig {
             minSdk = 24
@@ -71,16 +85,39 @@ subprojects {
     }
 
     dependencies {
-        val discord by configurations
+        val flixclusive by configurations
         val implementation by configurations
 
-        // Stubs for all Discord classes
-        discord("com.discord:discord:aliucord-SNAPSHOT")
-        implementation("com.aliucord:Aliucord:main-SNAPSHOT")
+        // Stubs for all Flixclusive classes
+        flixclusive("com.flixclusive:flixclusive:pre-release")
 
-        implementation("androidx.appcompat:appcompat:1.4.0")
-        implementation("com.google.android.material:material:1.4.0")
-        implementation("androidx.constraintlayout:constraintlayout:2.1.2")
+        // Uncomment if implementing own SettingsScreen
+        val composeBom = platform("androidx.compose:compose-bom:2024.01.00")
+        implementation(composeBom)
+        implementation("androidx.compose.material3:material3")
+        implementation("androidx.compose.foundation:foundation")
+        implementation("androidx.compose.ui:ui")
+        implementation("androidx.compose.runtime:runtime")
+        // ================= END: COMPOSE UI =================
+
+        // ============= START: SCRAPING TOOLS =============
+        val okHttpBom = platform("com.squareup.okhttp3:okhttp-bom:4.12.0")
+        implementation(okHttpBom)
+        // define any required OkHttp artifacts without version
+        implementation("com.squareup.okhttp3:okhttp")
+        implementation("com.squareup.okhttp3:okhttp-dnsoverhttps")
+        implementation("com.squareup.okhttp3:logging-interceptor")
+
+
+        implementation("org.jsoup:jsoup:1.16.1")
+        implementation("com.google.code.gson:gson:2.10.1")
+        // ============== END: SCRAPING TOOLS =============
+
+        // ============= START: FOR TESTING ===============
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+        implementation("junit:junit:4.13.2")
+        implementation("io.mockk:mockk:1.13.8")
+        // ============== END: FOR TESTING ================
     }
 }
 

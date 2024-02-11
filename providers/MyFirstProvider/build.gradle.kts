@@ -1,7 +1,7 @@
 version = "1.0.0" // Plugin version. Increment this to trigger the updater
-description = "My first patch!" // Plugin description that will be shown to user
+description = "My first provider!" // Plugin description that will be shown to user
 
-aliucord {
+flixclusive {
     // Changelog of your plugin
     changelog.set("""
         Some changelog
