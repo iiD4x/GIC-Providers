@@ -7,6 +7,7 @@ buildscript {
         mavenCentral()
         // Shitpack which still contains some Flixclusive dependencies for now.
         maven("https://jitpack.io")
+        mavenLocal() // <- For testing
     }
 
     dependencies {
@@ -14,7 +15,7 @@ buildscript {
         // Flixclusive gradle plugin which makes everything work and builds plugins
         classpath("com.github.Flixclusive.plugins-gradle:plugins-gradle:main-SNAPSHOT")
         // Kotlin support. Remove if you want to use Java
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21")
     }
 }
 
@@ -38,7 +39,13 @@ subprojects {
 
     // Fill out with your info
     flixclusive {
-        // Add authors
+        /**
+         *
+         * Add the author(s) of this repository.
+         *
+         * Additionally, you could add your
+         * own user link and your discord id
+         * */
         author(
             name = "MyUsername",
             // userLink = "http://github.com/myGithubUsername",
@@ -47,10 +54,10 @@ subprojects {
         // author( ... )
         // author( ... )
 
-        updateUrl.set("https://raw.githubusercontent.com/USERNAME/REPONAME/builds/updater.json")
-        buildUrl.set("https://raw.githubusercontent.com/USERNAME/REPONAME/builds/%s.flx")
+        setRepository("https://github.com/your_username/myRepository")
     }
 
+    @Suppress("UnstableApiUsage")
     android {
         compileSdkVersion(31)
 
@@ -59,7 +66,7 @@ subprojects {
         }
 
         composeOptions.apply {
-            kotlinCompilerExtensionVersion = "1.5.9"
+            kotlinCompilerExtensionVersion = "1.5.7"
         }
 
         defaultConfig {
@@ -87,6 +94,7 @@ subprojects {
     dependencies {
         val flixclusive by configurations
         val implementation by configurations
+        val testImplementation by configurations
 
         // Stubs for all Flixclusive classes
         flixclusive("com.flixclusive:flixclusive:pre-release")
@@ -114,9 +122,9 @@ subprojects {
         // ============== END: SCRAPING TOOLS =============
 
         // ============= START: FOR TESTING ===============
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-        implementation("junit:junit:4.13.2")
-        implementation("io.mockk:mockk:1.13.8")
+        testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+        testImplementation("junit:junit:4.13.2")
+        testImplementation("io.mockk:mockk:1.13.8")
         // ============== END: FOR TESTING ================
     }
 }
