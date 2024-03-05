@@ -2,31 +2,28 @@ import com.flixclusive.gradle.entities.Language
 import com.flixclusive.gradle.entities.PluginType
 import com.flixclusive.gradle.entities.Status
 
-/**
- *
- * Versions by level/hierarchy.
- * Increment one of these to trigger the updater
- * */
-val versionMajor = 1
-val versionMinor = 0
-val versionPatch = 0
-
-// !! WARN: PLEASE DO NOT CHANGE HOW THE VERSION NAMING IS STRUCTURED !!
-version = "${versionMajor}.${versionMinor}.${versionPatch}"
-
-
-description = "My first provider!" // Plugin description that will be shown to user
-
-
 dependencies {
     /**
-     * Custom dependencies for each provider should fall here.
+     * Custom dependencies for each provider should be implemented here.
      * */
     // implementation( ... )
 }
 
 flixclusive {
     // ====== Provider Description =======
+    description.set("My first provider!")
+
+    /**
+     *
+     * Versions by level/hierarchy.
+     * Increment one of these to trigger the updater
+     * */
+    versionMajor = 1
+    versionMinor = 0
+    versionPatch = 0
+    versionBuild = 0
+    // set custom versionName to override default version name
+
     // Changelog of your plugin
     changelog.set(
         """
@@ -35,6 +32,7 @@ flixclusive {
         TODO: Add your changes here...
         """.trimIndent()
     ) // OPTIONAL
+
     /**
      * Image or Gif that will be shown at the top of your changelog page
      * */
