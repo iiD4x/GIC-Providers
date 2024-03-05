@@ -11,6 +11,10 @@ import okhttp3.OkHttpClient
 /**
  * ## The main class for a Flixclusive plugin.
  *
+ * A [Plugin] acts as a middleman between your [Provider]
+ * and the application. It facilitates the lifecycle of your [Provider],
+ * ensuring seamless integration with the application.
+ *
  * #### WARN: Every plugin must be annotated with [FlixclusivePlugin].
  *
  * To create a plugin, extend this class and override the necessary methods.
