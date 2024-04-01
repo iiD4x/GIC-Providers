@@ -1,4 +1,4 @@
-rootProject.name = "plugins-template"
+rootProject.name = "providers-template"
 
 /**
 *
@@ -8,19 +8,19 @@ rootProject.name = "plugins-template"
 * */
 include(
     "MyFirstProvider",
-    // "MySecondPlugin",
+    // "MySecondProvider",
 )
 
 
 /**
- * This is required because plugins are in the ExamplePlugins/kotlin subdirectory.
+ * This is required because providers are in the ExampleProviders/kotlin subdirectory.
  *
- * Assuming you put all your plugins into the project root, so on the same
+ * Assuming you put all your providers into the project root, so on the same
  * level as this file, simply remove everything below.
  *
  * Otherwise, if you want a different structure, for example all
- * plugins in a folder called "plugins",
- * then simply change the path to `file("plugins/${it.name})`
+ * providers in a folder called "providers",
+ * then simply change the path to `file("providers/${it.name})`
  */
 rootProject.children.forEach {
     it.projectDir = file("providers/${it.name}")

@@ -1,5 +1,5 @@
 import com.flixclusive.gradle.entities.Language
-import com.flixclusive.gradle.entities.PluginType
+import com.flixclusive.gradle.entities.ProviderType
 import com.flixclusive.gradle.entities.Status
 
 dependencies {
@@ -41,7 +41,7 @@ flixclusive {
     /**
      * Add additional authors to this plugin
      * */
-    author("SecondAuthor", discordId = 123L)
+    author("SecondAuthor")
     // author( ... )
 
     /**
@@ -55,7 +55,7 @@ flixclusive {
      * There are two supported values:
      * - Language.Multiple
      *      > Obviously for providers w/ multiple language support.
-     * - Language.Specific("en")
+     * - Language("en")
      *      > For specific languages only. NOTE: Use the language's short-hand code.
      */
     language.set(Language.Multiple)
@@ -64,12 +64,12 @@ flixclusive {
      * The main type that your provider supports.
      *
      * These are the possible values you could set:
-     * - PluginType.All
-     * - PluginType.TvShows
-     * - PluginType.Movies
-     * - PluginType.Custom(customType: String) // i.e., PluginType.Custom("OVA")
+     * - ProviderType.All
+     * - ProviderType.TvShows
+     * - ProviderType.Movies
+     * - ProviderType(customType: String) // i.e., ProviderType("Anime")
      */
-    pluginType.set(PluginType.All)
+    providerType.set(ProviderType.All)
 
     /**
      * The current status of this provider.

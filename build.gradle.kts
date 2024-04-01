@@ -1,7 +1,15 @@
 import com.flixclusive.gradle.FlixclusiveExtension
 import com.android.build.gradle.BaseExtension
 
+
 buildscript {
+    configurations.getByName("classpath") {
+        // Change this to `...(0, TimeUnit.SECONDS)`
+        // to force update the providers-gradle dependency. Then, just return it
+        // back to its default value `...(6, TimeUnit.HOURS)`
+        resolutionStrategy.cacheChangingModulesFor(6, TimeUnit.HOURS)
+    }
+
     repositories {
         google()
         mavenCentral()
@@ -12,8 +20,10 @@ buildscript {
 
     dependencies {
         classpath("com.android.tools.build:gradle:7.2.2")
-        // Flixclusive gradle plugin which makes everything work and builds plugins
-        classpath("com.github.Flixclusive:plugins-gradle:main-SNAPSHOT")
+        // Flixclusive gradle plugin which makes everything work and builds providers
+        classpath("com.github.Flixclusive.providers-gradle:providers-gradle:main-SNAPSHOT") {
+            isChanging = true
+        }
         // Kotlin support. Remove if you want to use Java
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21")
     }
@@ -43,13 +53,12 @@ subprojects {
          *
          * Add the author(s) of this repository.
          *
-         * Additionally, you could add your
-         * own user link and your discord id
+         * Optionally, you can add your
+         * own github profile link
          * */
         author(
             name = "MyUsername",
-            // userLink = "http://github.com/myGithubUsername",
-            // discordId = 123456789L
+            // githubLink = "http://github.com/myGithubUsername",
         )
         // author( ... )
         // author( ... )
@@ -97,9 +106,11 @@ subprojects {
         val testImplementation by configurations
 
         // Stubs for all Flixclusive classes
-        flixclusive("com.flixclusive:flixclusive:pre-release")
+        flixclusive("com.flixclusive:flixclusive:pre-release") {
+            isChanging = true
+        }
 
-        // Uncomment if implementing own SettingsScreen
+        // Comment if not implementing own SettingsScreen
         val composeBom = platform("androidx.compose:compose-bom:2024.01.00")
         implementation(composeBom)
         implementation("androidx.compose.material3:material3")

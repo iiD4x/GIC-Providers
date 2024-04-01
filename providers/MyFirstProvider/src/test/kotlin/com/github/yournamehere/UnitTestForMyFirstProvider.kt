@@ -17,7 +17,7 @@ import org.junit.Test
  *
  * @see BaseProviderTest
  */
-class MyFirstProviderUnitTest /*: BaseProviderTest() */ {
+class MyFirstProviderApiUnitTest /*: BaseProviderTest() */ {
 
     /**
      * Tests the behavior of `getFilmInfo` method for a specific film ID.
@@ -34,15 +34,15 @@ class MyFirstProviderUnitTest /*: BaseProviderTest() */ {
     fun `test getFilmInfo for some_film_id returns non-empty film title`()
             = runTest {
         // Arrange
-        val myFirstProvider = MyFirstProvider(
+        val myFirstProviderApi = MyFirstProviderApi(
             OkHttpClient(),
-            MyFirstPlugin()
+            MyFirstProviderApi()
         )
 
         val filmId = "some_film_id"
 
         // Act
-        val result = myFirstProvider.getFilmInfo(
+        val result = myFirstProviderApi.getFilmInfo(
             filmId = filmId,
             filmType = FilmType.TV_SHOW
         )
