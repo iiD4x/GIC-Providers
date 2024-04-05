@@ -68,7 +68,7 @@ subprojects {
 
     @Suppress("UnstableApiUsage")
     android {
-        compileSdkVersion(31)
+        compileSdkVersion(34)
 
         buildFeatures.apply {
             compose = true
@@ -80,7 +80,7 @@ subprojects {
 
         defaultConfig {
             minSdk = 24
-            targetSdk = 31
+            targetSdk = 34
         }
 
         compileOptions {
@@ -91,11 +91,6 @@ subprojects {
         tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
             kotlinOptions {
                 jvmTarget = "11" // Required
-                // Disables some unnecessary features
-                freeCompilerArgs = freeCompilerArgs +
-                        "-Xno-call-assertions" +
-                        "-Xno-param-assertions" +
-                        "-Xno-receiver-assertions"
             }
         }
     }
