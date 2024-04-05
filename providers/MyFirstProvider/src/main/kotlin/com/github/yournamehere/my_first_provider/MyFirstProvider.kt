@@ -1,7 +1,6 @@
 package com.github.yournamehere.my_first_provider
 
 import android.content.Context
-import android.content.res.Resources
 import androidx.compose.runtime.Composable
 import com.flixclusive.provider.FlixclusiveProvider
 import com.flixclusive.provider.Provider
@@ -30,11 +29,9 @@ class MyFirstProvider : Provider() {
      *
      *
      * Displays the settings screen for the provider.
-     *
-     * @param resources Resources needed for rendering.
      */
     @Composable
-    override fun SettingsScreen(resources: Resources?) {
+    override fun SettingsScreen() {
         // TODO("OPTIONAL: Not yet implemented")
 
         // Create a custom component for code readability
