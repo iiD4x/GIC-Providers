@@ -7,6 +7,26 @@ dependencies {
      * Custom dependencies for each provider should be implemented here.
      * */
     // implementation( ... )
+
+    // Comment if not implementing own SettingsScreen
+    val composeBom = platform("androidx.compose:compose-bom:2024.04.00")
+    implementation(composeBom)
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.runtime:runtime")
+    // ================= END: COMPOSE UI =================
+
+}
+
+android {
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
+    }
 }
 
 flixclusive {

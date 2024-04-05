@@ -1,4 +1,4 @@
-package com.github.yournamehere
+package com.github.yournamehere.my_first_provider
 
 import android.content.Context
 import android.content.res.Resources
@@ -36,7 +36,6 @@ class MyFirstProvider : Provider() {
     @Composable
     override fun SettingsScreen(resources: Resources?) {
         // TODO("OPTIONAL: Not yet implemented")
-
 
         // Create a custom component for code readability
         ExampleSettingsScreen(resources = resources)

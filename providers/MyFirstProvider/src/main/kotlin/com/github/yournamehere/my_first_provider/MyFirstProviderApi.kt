@@ -1,4 +1,4 @@
-package com.github.yournamehere
+package com.github.yournamehere.my_first_provider
 
 import com.flixclusive.core.util.film.FilmType
 import com.flixclusive.model.provider.SourceLink

@@ -25,7 +25,7 @@ buildscript {
             isChanging = true
         }
         // Kotlin support. Remove if you want to use Java
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
     }
 }
 
@@ -66,20 +66,11 @@ subprojects {
         setRepository("https://github.com/your_username/myRepository")
     }
 
-    @Suppress("UnstableApiUsage")
     android {
         compileSdkVersion(34)
 
-        buildFeatures.apply {
-            compose = true
-        }
-
-        composeOptions.apply {
-            kotlinCompilerExtensionVersion = "1.5.7"
-        }
-
         defaultConfig {
-            minSdk = 24
+            minSdk = 21
             targetSdk = 34
         }
 
@@ -104,15 +95,6 @@ subprojects {
         flixclusive("com.flixclusive:flixclusive:pre-release") {
             isChanging = true
         }
-
-        // Comment if not implementing own SettingsScreen
-        val composeBom = platform("androidx.compose:compose-bom:2024.01.00")
-        implementation(composeBom)
-        implementation("androidx.compose.material3:material3")
-        implementation("androidx.compose.foundation:foundation")
-        implementation("androidx.compose.ui:ui")
-        implementation("androidx.compose.runtime:runtime")
-        // ================= END: COMPOSE UI =================
 
         // ============= START: SCRAPING TOOLS =============
         val okHttpBom = platform("com.squareup.okhttp3:okhttp-bom:4.12.0")

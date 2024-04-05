@@ -1,4 +1,4 @@
-package com.github.yournamehere
+package com.github.yournamehere.my_first_provider
 
 import android.content.res.Resources
 import androidx.compose.material3.Text

@@ -1,7 +1,7 @@
-package com.github.yournamehere
+package com.github.yournamehere.my_first_provider
 
 import com.flixclusive.core.util.film.FilmType
-import com.flixclusive.provider.base.testing.BaseProviderTest
+import com.flixclusive.provider.testing.BaseProviderTest
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import org.junit.Test
@@ -36,7 +36,7 @@ class MyFirstProviderApiUnitTest /*: BaseProviderTest() */ {
         // Arrange
         val myFirstProviderApi = MyFirstProviderApi(
             OkHttpClient(),
-            MyFirstProviderApi()
+            MyFirstProvider()
         )
 
         val filmId = "some_film_id"
