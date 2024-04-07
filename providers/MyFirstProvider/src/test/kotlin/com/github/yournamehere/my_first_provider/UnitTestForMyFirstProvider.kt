@@ -1,7 +1,6 @@
 package com.github.yournamehere.my_first_provider
 
 import com.flixclusive.core.util.film.FilmType
-import com.flixclusive.provider.testing.BaseProviderTest
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import org.junit.Test
@@ -9,15 +8,10 @@ import org.junit.Test
 /**
  * ## Template unit test for your providers.
  *
- * TIP: Uncomment the inheritance for [BaseProviderTest](https://github.com/rhenwinch/Flixclusive/blob/master/provider/base/src/main/kotlin/com/flixclusive/provider/base/testing/BaseProviderTest.kt)
- * if you're too lazy to create your own test cases
- *
- * This template provides a starting point for testing your provider classes.
  * Follow the Arrange-Act-Assert pattern for each test method.
  *
- * @see BaseProviderTest
  */
-class MyFirstProviderApiUnitTest /*: BaseProviderTest() */ {
+class MyFirstProviderApiUnitTest {
 
     /**
      * Tests the behavior of `getFilmInfo` method for a specific film ID.

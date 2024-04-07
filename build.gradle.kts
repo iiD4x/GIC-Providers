@@ -75,13 +75,15 @@ subprojects {
         }
 
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            isCoreLibraryDesugaringEnabled = true
+
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
 
         tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
             kotlinOptions {
-                jvmTarget = "11" // Required
+                jvmTarget = JavaVersion.VERSION_17.toString() // Required
             }
         }
     }
@@ -90,6 +92,9 @@ subprojects {
         val flixclusive by configurations
         val implementation by configurations
         val testImplementation by configurations
+        val coreLibraryDesugaring by configurations
+
+        coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
         // Stubs for all Flixclusive classes
         flixclusive("com.flixclusive:flixclusive:pre-release") {
