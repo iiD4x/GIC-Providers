@@ -12,7 +12,6 @@ import com.flixclusive.provider.Provider
 import com.flixclusive.provider.ProviderApi
 import com.flixclusive.provider.dto.FilmInfo
 import com.flixclusive.provider.dto.SearchResults
-import com.flixclusive.provider.extractor.Extractor
 import com.flixclusive.provider.util.FlixclusiveWebView
 import com.flixclusive.provider.util.WebViewCallback
 import okhttp3.OkHttpClient
@@ -20,20 +19,9 @@ import okhttp3.OkHttpClient
 /**
  * An inheritance class for a [ProviderApi]. This will serve as the [Provider] api instance.
  *
- * #### NOTE: Always add these template parameters on the constructor. The app will handle this automatically.
- *
- * @param client The [OkHttpClient] instance used for network requests.
- * @property provider The [Provider] instance that contains all the provider information of this api. You can change the data type of [Provider] to your custom [Provider] if you'd like. For example:
- * ```
- * class MyFirstProviderApi(
- *     ...,
- *     private val provider: MyFirstProvider
- * ) : ProviderApi(client) {
- * ```
  */
 class MyFirstProviderApi(
-    client: OkHttpClient,
-    private val provider: Provider
+    client: OkHttpClient
 ) : ProviderApi(client) {
     /**
      * The name of the provider.
@@ -46,12 +34,6 @@ class MyFirstProviderApi(
      */
     override val baseUrl: String
         get() = super.baseUrl
-
-    /**
-     * The list of supported extractors, embeds, or servers for this provider instance. Defaults to an empty list
-     */
-    override val supportedExtractors: List<Extractor>
-        get() = super.supportedExtractors
 
 
     /**

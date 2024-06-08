@@ -50,7 +50,7 @@ class MyFirstProvider : Provider() {
         context: Context?,
         client: OkHttpClient
     ): ProviderApi {
-        return MyFirstProviderApi(client, this)
+        return MyFirstProviderApi(client)
     }
 
     /**

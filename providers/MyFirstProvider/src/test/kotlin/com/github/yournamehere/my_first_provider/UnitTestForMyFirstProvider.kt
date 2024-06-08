@@ -28,10 +28,7 @@ class MyFirstProviderApiUnitTest {
     fun `test getFilmInfo for some_film_id returns non-empty film title`()
             = runTest {
         // Arrange
-        val myFirstProviderApi = MyFirstProviderApi(
-            OkHttpClient(),
-            MyFirstProvider()
-        )
+        val myFirstProviderApi = MyFirstProviderApi(OkHttpClient())
 
         val filmId = "some_film_id"
 
