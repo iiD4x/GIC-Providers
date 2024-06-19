@@ -1,17 +1,18 @@
 package com.github.yournamehere.my_first_provider
 
 import android.content.Context
-import com.flixclusive.core.util.film.FilmType
+import com.flixclusive.model.provider.ProviderCatalog
 import com.flixclusive.model.provider.SourceLink
 import com.flixclusive.model.provider.Subtitle
 import com.flixclusive.model.tmdb.Film
+import com.flixclusive.model.tmdb.FilmDetails
+import com.flixclusive.model.tmdb.FilmSearchItem
 import com.flixclusive.model.tmdb.Movie
-import com.flixclusive.model.tmdb.TMDBEpisode
+import com.flixclusive.model.tmdb.SearchResponseData
 import com.flixclusive.model.tmdb.TvShow
+import com.flixclusive.model.tmdb.common.tv.Episode
 import com.flixclusive.provider.Provider
 import com.flixclusive.provider.ProviderApi
-import com.flixclusive.provider.dto.FilmInfo
-import com.flixclusive.provider.dto.SearchResults
 import com.flixclusive.provider.util.FlixclusiveWebView
 import com.flixclusive.provider.util.WebViewCallback
 import okhttp3.OkHttpClient
@@ -35,7 +36,6 @@ class MyFirstProviderApi(
     override val baseUrl: String
         get() = super.baseUrl
 
-
     /**
      * Whether this provider needs to use a WebView to scrape content
      * */
@@ -43,31 +43,45 @@ class MyFirstProviderApi(
         get() = super.useWebView
 
     /**
+     *
+     * The list of [ProviderCatalog] that this provider supports. Defaults to empty
+     * */
+    override val catalogs: List<ProviderCatalog>
+        get() = super.catalogs
+
+    /**
+     *
+     * Called when the app needs to fetch items from
+     * this provider's [catalogs] list.
+     * */
+    override suspend fun getCatalogItems(
+        catalog: ProviderCatalog,
+        page: Int
+    ): SearchResponseData<FilmSearchItem> {
+        return super.getCatalogItems(catalog, page)
+    }
+
+    /**
      * Retrieves detailed information about a film.
-     * @param filmId The ID of the film.
-     * @param filmType The type of film.
-     * @return a [FilmInfo] instance containing the film's information.
+     * @param film The Film object of the film to retrieve details for.
+     * @return a [FilmDetails] instance containing the film's information.
      */
-    override suspend fun getFilmInfo(
-        filmId: String,
-        filmType: FilmType
-    ): FilmInfo {
+    override suspend fun getFilmDetails(film: Film): FilmDetails {
         TODO("Not yet implemented")
     }
 
     /**
      * Obtains source links for the provided film, season, and episode.
-     * @param filmId The ID of the film. The ID must come from the [search] method.
+     * @param watchId The ID of the film. The ID must come from the [search] method.
      * @param film The [Film] object of the film. It could either be a [Movie] or [TvShow].
      * @param episode The episode number. Defaults to null if the film is a movie.
      * @param onLinkLoaded A callback function invoked when a [SourceLink] is loaded.
      * @param onSubtitleLoaded A callback function invoked when a [Subtitle] is loaded.
      */
     override suspend fun getSourceLinks(
-        filmId: String,
-        film: Film,
-        season: Int?,
-        episode: Int?,
+        watchId: String,
+        film: FilmDetails,
+        episode: Episode?,
         onLinkLoaded: (SourceLink) -> Unit,
         onSubtitleLoaded: (Subtitle) -> Unit
     ) {
@@ -75,16 +89,24 @@ class MyFirstProviderApi(
     }
 
     /**
-     * Performs a search for films based on the provided query.
-     * @param film The [Film] object of the film. It could either be a [Movie] or [TvShow].
-     * @param page The page number for paginated results. Defaults to 1.
-     * @return a [SearchResults] instance containing the search results.
+     * Searches for films based on the provided criteria.
+     *
+     * @param title The title of the film to search for.
+     * @param id The ID of the film to search for (optional).
+     * @param tmdbId The TMDB ID of the film to search for (optional).
+     * @param imdbId The IMDB ID of the film to search for (optional).
+     * @param page The page number of the search results (optional, defaults to 1).
+     *
+     * @return A [SearchResponseData] object containing the search results.
      */
     override suspend fun search(
-        film: Film,
-        page: Int
-    ): SearchResults {
-        TODO("Not yet implemented")
+        title: String,
+        page: Int,
+        id: String?,
+        imdbId: String?,
+        tmdbId: Int?
+    ): SearchResponseData<FilmSearchItem> {
+        return super.search(title, page, id, imdbId, tmdbId)
     }
 
     /**
@@ -99,7 +121,9 @@ class MyFirstProviderApi(
     override fun getWebView(
         context: Context,
         callback: WebViewCallback,
-        film: Film,
-        episode: TMDBEpisode?
-    ): FlixclusiveWebView? = super.getWebView(context, callback, film, episode)
+        film: FilmDetails,
+        episode: Episode?
+    ): FlixclusiveWebView? {
+        return super.getWebView(context, callback, film, episode)
+    }
 }

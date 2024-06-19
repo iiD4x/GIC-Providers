@@ -1,5 +1,6 @@
-import com.flixclusive.gradle.FlixclusiveExtension
+
 import com.android.build.gradle.BaseExtension
+import com.flixclusive.gradle.FlixclusiveProviderExtension
 
 
 buildscript {
@@ -37,7 +38,7 @@ allprojects {
     }
 }
 
-fun Project.flixclusive(configuration: FlixclusiveExtension.() -> Unit) = extensions.getByName<FlixclusiveExtension>("flixclusive").configuration()
+fun Project.flxProvider(configuration: FlixclusiveProviderExtension.() -> Unit) = extensions.getByName<FlixclusiveProviderExtension>("flxProvider").configuration()
 
 fun Project.android(configuration: BaseExtension.() -> Unit) = extensions.getByName<BaseExtension>("android").configuration()
 
@@ -48,7 +49,7 @@ subprojects {
     apply(plugin = "kotlin-android")
 
     // Fill out with your info
-    flixclusive {
+    flxProvider {
         /**
          *
          * Add the author(s) of this repository.
@@ -89,7 +90,7 @@ subprojects {
     }
 
     dependencies {
-        val flixclusive by configurations
+        val getProviderStubs by configurations
         val implementation by configurations
         val testImplementation by configurations
         val coreLibraryDesugaring by configurations
@@ -97,7 +98,7 @@ subprojects {
         coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
         // Stubs for all Flixclusive classes
-        flixclusive("com.flixclusive:flixclusive:pre-release") {
+        getProviderStubs("rhenwinch:Flixclusive:pre-release") {
             isChanging = true
         }
 

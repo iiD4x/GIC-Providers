@@ -29,15 +29,10 @@ android {
     }
 }
 
-flixclusive {
+flxProvider {
     // ====== Provider Description =======
     description.set("My first provider!")
 
-    /**
-     *
-     * Versions by level/hierarchy.
-     * Increment one of these to trigger the updater
-     * */
     versionMajor = 1
     versionMinor = 0
     versionPatch = 0
@@ -52,11 +47,6 @@ flixclusive {
         TODO: Add your changes here...
         """.trimIndent()
     ) // OPTIONAL
-
-    /**
-     * Image or Gif that will be shown at the top of your changelog page
-     * */
-    // changelogMedia.set("https://cool.png") // OPTIONAL
 
     /**
      * Add additional authors to this plugin

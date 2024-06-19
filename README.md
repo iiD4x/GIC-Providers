@@ -1,8 +1,8 @@
 # Flixclusive Provider Repo Template
 
-Template for an [Flixclusive](https://github.com/rhenwinch/Flixclusive) providers repo
+Template for a [Flixclusive](https://github.com/rhenwinch/Flixclusive) providers repo
 
-⚠️ Make sure you check "Include all branches" when using this template
+⚠️ Make sure you check **"Include all branches"** when using this template
 
  
 ## Getting started with writing your first providers
