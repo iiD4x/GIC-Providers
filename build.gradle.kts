@@ -1,20 +1,11 @@
-
 import com.android.build.gradle.BaseExtension
 import com.flixclusive.gradle.FlixclusiveProviderExtension
 
 
 buildscript {
-    configurations.getByName("classpath") {
-        // Change this to `...(0, TimeUnit.SECONDS)`
-        // to force update the providers-gradle dependency. Then, just return it
-        // back to its default value `...(6, TimeUnit.HOURS)`
-        resolutionStrategy.cacheChangingModulesFor(6, TimeUnit.HOURS)
-    }
-
     repositories {
         google()
         mavenCentral()
-        // Shitpack which still contains some Flixclusive dependencies for now.
         maven("https://jitpack.io")
         mavenLocal() // <- For testing
     }
@@ -22,9 +13,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:7.2.2")
         // Flixclusive gradle plugin which makes everything work and builds providers
-        classpath("com.github.Flixclusive.providers-gradle:providers-gradle:main-SNAPSHOT") {
-            isChanging = true
-        }
+        classpath("com.github.Flixclusive.providers-gradle:providers-gradle:1.1.2")
         // Kotlin support. Remove if you want to use Java
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
     }
@@ -95,12 +84,10 @@ subprojects {
         val testImplementation by configurations
         val coreLibraryDesugaring by configurations
 
-        coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+        coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
 
         // Stubs for all Flixclusive classes
-        getProviderStubs("rhenwinch:Flixclusive:pre-release") {
-            isChanging = true
-        }
+        getProviderStubs("rhenwinch:Flixclusive:pre-release")
 
         // ============= START: SCRAPING TOOLS =============
         val okHttpBom = platform("com.squareup.okhttp3:okhttp-bom:4.12.0")
