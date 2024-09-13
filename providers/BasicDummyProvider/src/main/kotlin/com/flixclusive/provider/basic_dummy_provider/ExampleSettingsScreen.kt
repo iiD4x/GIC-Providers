@@ -1,4 +1,4 @@
-package com.github.yournamehere.my_first_provider
+package com.flixclusive.provider.basic_dummy_provider
 
 import android.content.res.Resources
 import androidx.compose.foundation.layout.Box

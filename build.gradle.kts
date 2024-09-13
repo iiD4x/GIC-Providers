@@ -47,13 +47,12 @@ subprojects {
          * own github profile link
          * */
         author(
-            name = "MyUsername",
-            // githubLink = "http://github.com/myGithubUsername",
+            name = "RepositoryOwner",
+            // githubLink = "http://github.com/RepositoryOwner",
         )
         // author( ... )
-        // author( ... )
 
-        setRepository("https://github.com/your_username/myRepository")
+        setRepository("https://github.com/Flixclusive/providers-template")
     }
 
     android {

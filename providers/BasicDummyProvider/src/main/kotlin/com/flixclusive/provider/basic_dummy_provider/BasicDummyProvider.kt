@@ -1,4 +1,4 @@
-package com.github.yournamehere.my_first_provider
+package com.flixclusive.provider.basic_dummy_provider
 
 import android.content.Context
 import androidx.compose.runtime.Composable
@@ -21,47 +21,23 @@ import okhttp3.OkHttpClient
  * @see [TODO: ADD DOCS LINK FOR PLUGIN CREATION !!!!!]
  */
 @FlixclusiveProvider
-class MyFirstProvider : Provider() {
-
-    /**
-     * TIP: This is an optional method to override
-     * if your provider won't require any settings screen.
-     *
-     *
-     * Displays the settings screen for the provider.
-     */
+class BasicDummyProvider : Provider() {
     @Composable
     override fun SettingsScreen() {
-        // TODO("OPTIONAL: Not yet implemented")
-
         // Create a custom component for code readability
         ExampleSettingsScreen(resources = resources)
     }
 
-    /**
-     * Return the [ProviderApi] in here to let
-     * the app handle the provider management.
-     *
-     *
-     * @param context The [Context] of the app.
-     * @param client A _dirty_ instance of [OkHttpClient] of the app.
-     */
     override fun getApi(
-        context: Context?,
+        context: Context,
         client: OkHttpClient
     ): ProviderApi {
-        return MyFirstProviderApi(client)
+        return BasicDummyProviderApi(
+            client = client,
+            provider = this
+        )
     }
 
-    /**
-     * TIP: This is an optional function to override.
-     *
-     * Allows additional block of code to be ran first
-     * before unloading this [Provider].
-     *
-     *
-     * @param context The [Context] of the app.
-     */
     override fun onUnload(context: Context?) {
         super.onUnload(context)
     }

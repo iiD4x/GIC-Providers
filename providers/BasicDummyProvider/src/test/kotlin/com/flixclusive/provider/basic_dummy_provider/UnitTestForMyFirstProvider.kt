@@ -1,6 +1,5 @@
-package com.github.yournamehere.my_first_provider
+package com.flixclusive.provider.basic_dummy_provider
 
-import com.flixclusive.core.util.film.FilmType
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import org.junit.Test
@@ -11,7 +10,9 @@ import org.junit.Test
  * Follow the Arrange-Act-Assert pattern for each test method.
  *
  */
-class MyFirstProviderApiUnitTest {
+class BasicDummyProviderApiUnitTest {
+
+    private val provider = BasicDummyProvider()
 
     /**
      * Tests the behavior of `getFilmInfo` method for a specific film ID.
@@ -26,19 +27,14 @@ class MyFirstProviderApiUnitTest {
      */
     @Test
     fun `test getFilmInfo for some_film_id returns non-empty film title`()
-            = runTest {
-        // Arrange
-        val myFirstProviderApi = MyFirstProviderApi(OkHttpClient())
+        = runTest {
+            // Arrange
+            val api = BasicDummyProviderApi(OkHttpClient(), provider)
 
-        val filmId = "some_film_id"
+            // Act
+            val result = api.getFilmDetails(film = api.testFilm)
 
-        // Act
-        val result = myFirstProviderApi.getFilmInfo(
-            filmId = filmId,
-            filmType = FilmType.TV_SHOW
-        )
-
-        // Assert
-        assert(result.title.isNotBlank())
-    }
+            // Assert
+            assert(result.title.isNotBlank())
+        }
 }

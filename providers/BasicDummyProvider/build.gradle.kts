@@ -3,7 +3,7 @@ import com.flixclusive.gradle.entities.ProviderType
 import com.flixclusive.gradle.entities.Status
 
 dependencies {
-    /**
+    /*
      * Custom dependencies for each provider should be implemented here.
      * */
     // implementation( ... )
@@ -31,7 +31,7 @@ android {
 
 flxProvider {
     // ====== Provider Description =======
-    description.set("My first provider!")
+    description.set("A dummy provider that does nothing.")
 
     versionMajor = 1
     versionMinor = 0
@@ -42,8 +42,6 @@ flxProvider {
     // Changelog of your plugin
     changelog.set(
         """
-        Some changelog:
-        
         TODO: Add your changes here...
         """.trimIndent()
     ) // OPTIONAL
@@ -51,6 +49,7 @@ flxProvider {
     /**
      * Add additional authors to this plugin
      * */
+    author("FirstAuthor")
     author("SecondAuthor")
     // author( ... )
 
@@ -96,9 +95,9 @@ flxProvider {
 
     // === Utilities ===
     /**
-     * Toggle this if you want to use the resources (R) of the main application.
+     * Toggle this if this provider has its own resources.
      */
-    // requiresResources.set(true) // OPTIONAL
+    requiresResources.set(true)
 
     /**
      * Excludes this plugin from the updater,
