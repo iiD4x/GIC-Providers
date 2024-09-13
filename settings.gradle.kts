@@ -8,6 +8,7 @@ rootProject.name = "providers-template"
 * */
 include(
     "BasicDummyProvider",
+    "BasicDummyWebViewProvider",
     // "MySecondProvider",
 )
 
