@@ -27,5 +27,5 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           commit-message: |
-            docs: update README `${GITHUB_SHA}` [skip ci]
+            docs: update README [skip ci]
           title: Providers status update
