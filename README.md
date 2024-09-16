@@ -60,6 +60,7 @@ Follow these steps to set up and create your own provider:
      ./gradlew :NewProvider:deployWithAdb --wait-for-debugger
      ```
      Then go ahead and click the attach debugger button.
+   
      <img src="https://i.imgur.com/d1k3ZZD.png" alt="Attach debugger to android process screenshot">
 
 5. **Testing your provider**:
@@ -69,7 +70,7 @@ Follow these steps to set up and create your own provider:
 ## Additional Resources
 
 - **Documentation** _(TODO)_
-- [**Provider API Reference**](https://flixclusiveorg.github.io/api/)
+- [**Provider API Reference**](https://flixclusiveorg.github.io/core-stubs/)
 
 ## Support
 
