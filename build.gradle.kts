@@ -48,6 +48,7 @@ subprojects {
          * */
         author(
             name = "flixclusiveorg",
+            image = "http://github.com/flixclusiveorg.png",
             socialLink = "http://github.com/flixclusiveorg",
         )
         // author( ... )
