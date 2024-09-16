@@ -1,18 +1,17 @@
 package com.flixclusive.provider.basic_dummy_webview_provider
 
 import android.content.Context
-import com.flixclusive.core.util.film.filter.FilterList
-import com.flixclusive.model.provider.MediaLink
+import com.flixclusive.model.film.Film
+import com.flixclusive.model.film.FilmDetails
+import com.flixclusive.model.film.FilmSearchItem
+import com.flixclusive.model.film.SearchResponseData
+import com.flixclusive.model.film.common.tv.Episode
 import com.flixclusive.model.provider.ProviderCatalog
-import com.flixclusive.model.tmdb.Film
-import com.flixclusive.model.tmdb.FilmDetails
-import com.flixclusive.model.tmdb.FilmSearchItem
-import com.flixclusive.model.tmdb.SearchResponseData
-import com.flixclusive.model.tmdb.common.tv.Episode
+import com.flixclusive.model.provider.link.MediaLink
 import com.flixclusive.provider.Provider
 import com.flixclusive.provider.ProviderApi
 import com.flixclusive.provider.ProviderWebViewApi
-import com.flixclusive.provider.basic_dummy_webview_provider.ProviderWebViewImpl
+import com.flixclusive.provider.filter.FilterList
 import com.flixclusive.provider.webview.ProviderWebView
 import okhttp3.OkHttpClient
 
@@ -61,6 +60,12 @@ class BasicDummyWebViewProviderApi(
     ): SearchResponseData<FilmSearchItem>
         = super.search(title, page, id, imdbId, tmdbId, filters)
 
+    /**
+     *
+     * The key highlight of this API.
+     *
+     * This should return a [ProviderWebView] instance.
+     * */
     override fun getWebView(): ProviderWebView {
         return ProviderWebViewImpl(context = context)
     }

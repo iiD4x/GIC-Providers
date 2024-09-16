@@ -11,9 +11,9 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:7.2.2")
+        classpath("com.android.tools.build:gradle:8.2.0")
         // Flixclusive gradle plugin which makes everything work and builds providers
-        classpath("com.github.Flixclusive.providers-gradle:providers-gradle:1.1.2")
+        classpath("com.github.flixclusiveorg.core-gradle:core-gradle:1.1.6")
         // Kotlin support. Remove if you want to use Java
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
     }
@@ -47,21 +47,26 @@ subprojects {
          * own github profile link
          * */
         author(
-            name = "Flixclusive",
-            socialLink = "http://github.com/Flixclusive",
+            name = "flixclusiveorg",
+            socialLink = "http://github.com/flixclusiveorg",
         )
         // author( ... )
 
-        setRepository("https://github.com/Flixclusive/providers-template")
+        setRepository("https://github.com/flixclusiveorg/providers-template")
     }
 
     android {
         compileSdkVersion(34)
 
+        namespace = "com.github.flixclusiveorg.providersTemplate.${name.replaceFirstChar { it.lowercase() }}"
+
         defaultConfig {
             minSdk = 21
             targetSdk = 34
         }
+
+        // REQUIRED: BuildConfig must always be ON!
+        buildFeatures.buildConfig = true
 
         compileOptions {
             isCoreLibraryDesugaringEnabled = true
@@ -78,7 +83,6 @@ subprojects {
     }
 
     dependencies {
-        val getProviderStubs by configurations
         val implementation by configurations
         val testImplementation by configurations
         val coreLibraryDesugaring by configurations
@@ -86,22 +90,10 @@ subprojects {
         coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
 
         // Stubs for all Flixclusive classes
-        getProviderStubs("rhenwinch:Flixclusive:pre-release")
-
-        // ============= START: SCRAPING TOOLS =============
-        val okHttpBom = platform("com.squareup.okhttp3:okhttp-bom:4.12.0")
-        implementation(okHttpBom)
-        // define any required OkHttp artifacts without version
-        implementation("com.squareup.okhttp3:okhttp")
-        implementation("com.squareup.okhttp3:okhttp-dnsoverhttps")
-        implementation("com.squareup.okhttp3:logging-interceptor")
-
-
-        implementation("org.jsoup:jsoup:1.16.1")
-        implementation("com.google.code.gson:gson:2.10.1")
-        // ============== END: SCRAPING TOOLS =============
+        implementation("com.github.flixclusiveorg.core-stubs:provider:1.0.4")
 
         // ============= START: FOR TESTING ===============
+        testImplementation("com.github.flixclusiveorg.core-stubs:provider:1.0.4")
         testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
         testImplementation("junit:junit:4.13.2")
         testImplementation("io.mockk:mockk:1.13.8")

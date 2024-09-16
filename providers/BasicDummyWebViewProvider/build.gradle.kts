@@ -1,6 +1,6 @@
-import com.flixclusive.gradle.entities.Language
-import com.flixclusive.gradle.entities.ProviderType
-import com.flixclusive.gradle.entities.Status
+import com.flixclusive.model.provider.Language
+import com.flixclusive.model.provider.ProviderType
+import com.flixclusive.model.provider.Status
 
 dependencies {
     /*
@@ -30,14 +30,15 @@ android {
 }
 
 flxProvider {
-    // ====== Provider Description =======
-    description.set("A dummy provider that does nothing but uses WebView")
+    // ====== Provider Information =======
+    adult.set(false)
+    // providerName.set("Test WebView Provider") <-- You can customize the name by uncommenting this one.
+    description.set("A dummy provider (with WebView) that does nothing.")
 
     versionMajor = 1
     versionMinor = 0
     versionPatch = 0
     versionBuild = 0
-    // set custom versionName to override default version name
 
     // Changelog of your plugin
     changelog.set(
