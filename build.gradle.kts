@@ -1,10 +1,12 @@
 import com.android.build.gradle.BaseExtension
 import com.flixclusive.gradle.FlixclusiveProviderExtension
+import com.flixclusive.gradle.getFlixclusive
 
 
 buildscript {
     repositories {
         google()
+        gradlePluginPortal()
         mavenCentral()
         maven("https://jitpack.io")
         mavenLocal() // <- For testing
@@ -13,7 +15,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:8.2.0")
         // Flixclusive gradle plugin which makes everything work and builds providers
-        classpath("com.github.flixclusiveorg.core-gradle:core-gradle:1.1.6")
+        classpath("com.github.flixclusiveorg.core-gradle:core-gradle:1.2.1")
         // Kotlin support. Remove if you want to use Java
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
     }
@@ -27,15 +29,15 @@ allprojects {
     }
 }
 
-fun Project.flxProvider(configuration: FlixclusiveProviderExtension.() -> Unit) = extensions.getByName<FlixclusiveProviderExtension>("flxProvider").configuration()
+fun Project.flxProvider(configuration: FlixclusiveProviderExtension.() -> Unit)
+    = extensions.getFlixclusive().configuration()
 
-fun Project.android(configuration: BaseExtension.() -> Unit) = extensions.getByName<BaseExtension>("android").configuration()
+fun Project.android(configuration: BaseExtension.() -> Unit)
+    = extensions.getByName<BaseExtension>("android").configuration()
 
 subprojects {
-    apply(plugin = "com.android.library")
-    apply(plugin = "com.flixclusive.gradle")
-    // Remove if using Java
-    apply(plugin = "kotlin-android")
+    apply(plugin = "flx-provider")
+    apply(plugin = "kotlin-android") // Remove if using Java
 
     // Fill out with your info
     flxProvider {
@@ -57,34 +59,12 @@ subprojects {
     }
 
     android {
-        compileSdkVersion(34)
-
         namespace = "com.github.flixclusiveorg.providersTemplate.${name.replaceFirstChar { it.lowercase() }}"
-
-        defaultConfig {
-            minSdk = 21
-            targetSdk = 34
-        }
-
-        // REQUIRED: BuildConfig must always be ON!
-        buildFeatures.buildConfig = true
-
-        compileOptions {
-            isCoreLibraryDesugaringEnabled = true
-
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
-        }
-
-        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-            kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_17.toString() // Required
-            }
-        }
     }
 
     dependencies {
         val implementation by configurations
+        val fatImplementation by configurations // <- use when you have non-supported libraries.
         val testImplementation by configurations
         val coreLibraryDesugaring by configurations
 
