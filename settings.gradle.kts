@@ -1,4 +1,4 @@
-rootProject.name = "providers-template"
+rootProject.name = "provider-template"
 
 /**
 *

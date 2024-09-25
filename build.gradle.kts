@@ -71,10 +71,10 @@ subprojects {
         coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
 
         // Stubs for all Flixclusive classes
-        implementation("com.github.flixclusiveorg.core-stubs:provider:1.0.4")
+        implementation("com.github.flixclusiveorg.core-stubs:provider:1.0.5")
 
         // ============= START: FOR TESTING ===============
-        testImplementation("com.github.flixclusiveorg.core-stubs:provider:1.0.4")
+        testImplementation("com.github.flixclusiveorg.core-stubs:provider:1.0.5")
         testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
         testImplementation("junit:junit:4.13.2")
         testImplementation("io.mockk:mockk:1.13.8")
