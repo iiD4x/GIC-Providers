@@ -9,8 +9,7 @@ dependencies {
     // implementation( ... )
 
     // Comment if not implementing own SettingsScreen
-    val composeBom = platform("androidx.compose:compose-bom:2024.04.00")
-    implementation(composeBom)
+    // No need to specify compose version explicitly
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.ui:ui")
