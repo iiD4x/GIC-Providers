@@ -15,7 +15,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:8.2.0")
         // Flixclusive gradle plugin which makes everything work and builds providers
-        classpath("com.github.flixclusiveorg.core-gradle:core-gradle:1.2.1")
+        classpath("com.github.flixclusiveorg.core-gradle:core-gradle:1.2.2")
         // Kotlin support. Remove if you want to use Java
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
     }
@@ -70,11 +70,14 @@ subprojects {
 
         coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
 
+        val coreStubsModule = "com.github.flixclusiveorg.core-stubs:provider"
+        val coreStubsVersion = "1.1.1"
+
         // Stubs for all Flixclusive classes
-        implementation("com.github.flixclusiveorg.core-stubs:provider:1.0.5")
+        implementation("$coreStubsModule:$coreStubsVersion")
 
         // ============= START: FOR TESTING ===============
-        testImplementation("com.github.flixclusiveorg.core-stubs:provider:1.0.5")
+        testImplementation("$coreStubsModule:$coreStubsVersion")
         testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
         testImplementation("junit:junit:4.13.2")
         testImplementation("io.mockk:mockk:1.13.8")
