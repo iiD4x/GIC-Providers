@@ -69,7 +69,7 @@ Follow these steps to set up and create your own provider:
 
 ## Additional Resources
 
-- **Documentation** _(TODO)_
+- [**Documentation**](https://flixclusiveorg.github.io/provider-docs/)
 - [**Provider API Reference**](https://flixclusiveorg.github.io/core-stubs/)
 
 ## Support
